@@ -4,7 +4,6 @@ import kalkulator
 class subKelas (kalkulator.frameUtama):
     def __init__(self,parent):
         kalkulator.frameUtama.__init__(self,parent)
-        self.hasil = ""
         self.tempStrCalc= ""
         self.tempCalc = []
     
@@ -56,10 +55,16 @@ class subKelas (kalkulator.frameUtama):
 
     #samadengan
     def Hasil( self, event ):
-        self.tempStrCalc = eval(self.tempStrCalc)
-        self.m_textTemp.SetValue(str(self.tempStrCalc))
-        self.tempCalc =[]
-        self.tempCalc.append(self.tempStrCalc)
+        try:
+            self.tempStrCalc = eval(self.tempStrCalc)
+            self.m_textTemp.SetValue(str(self.tempStrCalc))
+            self.tempCalc =[]
+            self.tempCalc.append(self.tempStrCalc)
+        except:
+            self.Clear(self)
+            wx.MessageBox('Komputer tidak memahami perintah anda!', 'Warning',
+                                     wx.OK |wx.ICON_WARNING)
+            #print('error')
 
     #tombol angka 
     def Tujuh( self, event ):
